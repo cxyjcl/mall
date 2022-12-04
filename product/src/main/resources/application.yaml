@@ -1,0 +1,28 @@
+server:
+  port: 9101
+
+spring:
+  application:
+    name: product
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+#springboot 默认的日志级别是info,改为debug
+logging:
+  level: #指定这个包下的日子为debug
+    org.gjw.feign.*: debug
+#feign的日志级别还可以这样配置
+feign:
+  client:
+    config:
+      dept:
+        #配置 调用 dept微服务超时时间
+        connectTimeout: 100 #连接时间
+        readTimeout: 1000 #执行时间
+
+sentinel:
+  transport:
+    dashboard: 127.0.0.1:8666 #配置Dashboard的ip和的客户
+    port: 8701 # #配置与Dashboard交互的端口 随便定义一个即可(只要未被占用，如果被占用会自行+1寻找端口)
