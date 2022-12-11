@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.order.dao.OrderItemDao">
+  <resultMap id="BaseResultMap" type="org.cool.order.pojo.OrderItem">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_sn" jdbcType="CHAR" property="orderSn" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="spu_name" jdbcType="VARCHAR" property="spuName" />
+    <result column="spu_pic" jdbcType="VARCHAR" property="spuPic" />
+    <result column="spu_brand" jdbcType="VARCHAR" property="spuBrand" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_pic" jdbcType="VARCHAR" property="skuPic" />
+    <result column="sku_price" jdbcType="DECIMAL" property="skuPrice" />
+    <result column="sku_quantity" jdbcType="INTEGER" property="skuQuantity" />
+    <result column="promotion_amount" jdbcType="DECIMAL" property="promotionAmount" />
+    <result column="coupon_amount" jdbcType="DECIMAL" property="couponAmount" />
+    <result column="integration_amount" jdbcType="DECIMAL" property="integrationAmount" />
+    <result column="real_amount" jdbcType="DECIMAL" property="realAmount" />
+    <result column="gift_integration" jdbcType="INTEGER" property="giftIntegration" />
+    <result column="gift_growth" jdbcType="INTEGER" property="giftGrowth" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, order_id, order_sn, spu_id, spu_name, spu_pic, spu_brand, category_id, sku_id, 
+    sku_name, sku_pic, sku_price, sku_quantity, promotion_amount, coupon_amount, integration_amount, 
+    real_amount, gift_integration, gift_growth
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from order_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cool.order.pojo.OrderItem">
+    insert into order_item (id, order_id, order_sn, 
+      spu_id, spu_name, spu_pic, 
+      spu_brand, category_id, sku_id, 
+      sku_name, sku_pic, sku_price, 
+      sku_quantity, promotion_amount, coupon_amount, 
+      integration_amount, real_amount, gift_integration, 
+      gift_growth)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{orderSn,jdbcType=CHAR}, 
+      #{spuId,jdbcType=BIGINT}, #{spuName,jdbcType=VARCHAR}, #{spuPic,jdbcType=VARCHAR}, 
+      #{spuBrand,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
+      #{skuName,jdbcType=VARCHAR}, #{skuPic,jdbcType=VARCHAR}, #{skuPrice,jdbcType=DECIMAL}, 
+      #{skuQuantity,jdbcType=INTEGER}, #{promotionAmount,jdbcType=DECIMAL}, #{couponAmount,jdbcType=DECIMAL}, 
+      #{integrationAmount,jdbcType=DECIMAL}, #{realAmount,jdbcType=DECIMAL}, #{giftIntegration,jdbcType=INTEGER}, 
+      #{giftGrowth,jdbcType=INTEGER})
+  </insert>
+
+</mapper>

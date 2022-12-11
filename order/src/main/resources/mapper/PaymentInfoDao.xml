@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.order.dao.PaymentInfoDao">
+  <resultMap id="BaseResultMap" type="org.cool.order.pojo.PaymentInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_sn" jdbcType="CHAR" property="orderSn" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="payment_status" jdbcType="VARCHAR" property="paymentStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+    <result column="callback_content" jdbcType="VARCHAR" property="callbackContent" />
+    <result column="callback_time" jdbcType="TIMESTAMP" property="callbackTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, order_sn, order_id, trade_no, pay_type, total_amount, subject, payment_status, 
+    create_time, confirm_time, callback_content, callback_time
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from payment_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from payment_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.order.pojo.PaymentInfo">
+    insert into payment_info (id, order_sn, order_id, 
+      trade_no, pay_type, total_amount, 
+      subject, payment_status, create_time, 
+      confirm_time, callback_content, callback_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderSn,jdbcType=CHAR}, #{orderId,jdbcType=BIGINT}, 
+      #{tradeNo,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{subject,jdbcType=VARCHAR}, #{paymentStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{confirmTime,jdbcType=TIMESTAMP}, #{callbackContent,jdbcType=VARCHAR}, #{callbackTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+</mapper>

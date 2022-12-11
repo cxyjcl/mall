@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.order.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="org.cool.order.pojo.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="order_sn" jdbcType="CHAR" property="orderSn" />
+    <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="member_username" jdbcType="VARCHAR" property="memberUsername" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="freight_amount" jdbcType="DECIMAL" property="freightAmount" />
+    <result column="promotion_amount" jdbcType="DECIMAL" property="promotionAmount" />
+    <result column="integration_amount" jdbcType="DECIMAL" property="integrationAmount" />
+    <result column="coupon_amount" jdbcType="DECIMAL" property="couponAmount" />
+    <result column="discount_amount" jdbcType="DECIMAL" property="discountAmount" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="source_type" jdbcType="TINYINT" property="sourceType" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="delivery_company" jdbcType="VARCHAR" property="deliveryCompany" />
+    <result column="delivery_sn" jdbcType="VARCHAR" property="deliverySn" />
+    <result column="auto_confirm_day" jdbcType="INTEGER" property="autoConfirmDay" />
+    <result column="integration" jdbcType="INTEGER" property="integration" />
+    <result column="growth" jdbcType="INTEGER" property="growth" />
+    <result column="bill_type" jdbcType="TINYINT" property="billType" />
+    <result column="bill_header" jdbcType="VARCHAR" property="billHeader" />
+    <result column="bill_content" jdbcType="VARCHAR" property="billContent" />
+    <result column="bill_receiver_phone" jdbcType="VARCHAR" property="billReceiverPhone" />
+    <result column="bill_receiver_email" jdbcType="VARCHAR" property="billReceiverEmail" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+    <result column="receiver_post_code" jdbcType="VARCHAR" property="receiverPostCode" />
+    <result column="receiver_province" jdbcType="VARCHAR" property="receiverProvince" />
+    <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity" />
+    <result column="receiver_region" jdbcType="VARCHAR" property="receiverRegion" />
+    <result column="receiver_detail_address" jdbcType="VARCHAR" property="receiverDetailAddress" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="confirm_status" jdbcType="TINYINT" property="confirmStatus" />
+    <result column="delete_status" jdbcType="TINYINT" property="deleteStatus" />
+    <result column="use_integration" jdbcType="INTEGER" property="useIntegration" />
+    <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
+    <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, member_id, order_sn, coupon_id, member_username, total_amount, pay_amount, freight_amount, 
+    promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, 
+    status, delivery_company, delivery_sn, auto_confirm_day, integration, growth, bill_type, 
+    bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, 
+    receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, 
+    receiver_detail_address, note, confirm_status, delete_status, use_integration, payment_time, 
+    delivery_time, receive_time, create_time, modify_time
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `order`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from `order`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.order.pojo.Order">
+    insert into `order` (id, member_id, order_sn,
+      coupon_id, member_username, total_amount, 
+      pay_amount, freight_amount, promotion_amount, 
+      integration_amount, coupon_amount, discount_amount, 
+      pay_type, source_type, status, 
+      delivery_company, delivery_sn, auto_confirm_day, 
+      integration, growth, bill_type, 
+      bill_header, bill_content, bill_receiver_phone, 
+      bill_receiver_email, receiver_name, receiver_phone, 
+      receiver_post_code, receiver_province, receiver_city, 
+      receiver_region, receiver_detail_address, 
+      note, confirm_status, delete_status, 
+      use_integration, payment_time, delivery_time, 
+      receive_time, create_time, modify_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{orderSn,jdbcType=CHAR}, 
+      #{couponId,jdbcType=BIGINT}, #{memberUsername,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{payAmount,jdbcType=DECIMAL}, #{freightAmount,jdbcType=DECIMAL}, #{promotionAmount,jdbcType=DECIMAL}, 
+      #{integrationAmount,jdbcType=DECIMAL}, #{couponAmount,jdbcType=DECIMAL}, #{discountAmount,jdbcType=DECIMAL}, 
+      #{payType,jdbcType=TINYINT}, #{sourceType,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{deliveryCompany,jdbcType=VARCHAR}, #{deliverySn,jdbcType=VARCHAR}, #{autoConfirmDay,jdbcType=INTEGER}, 
+      #{integration,jdbcType=INTEGER}, #{growth,jdbcType=INTEGER}, #{billType,jdbcType=TINYINT}, 
+      #{billHeader,jdbcType=VARCHAR}, #{billContent,jdbcType=VARCHAR}, #{billReceiverPhone,jdbcType=VARCHAR}, 
+      #{billReceiverEmail,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, 
+      #{receiverPostCode,jdbcType=VARCHAR}, #{receiverProvince,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR}, 
+      #{receiverRegion,jdbcType=VARCHAR}, #{receiverDetailAddress,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{confirmStatus,jdbcType=TINYINT}, #{deleteStatus,jdbcType=TINYINT}, 
+      #{useIntegration,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, #{deliveryTime,jdbcType=TIMESTAMP}, 
+      #{receiveTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+</mapper>
