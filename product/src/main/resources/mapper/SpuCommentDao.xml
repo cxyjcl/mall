@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.product.dao.SpuCommentDao">
+  <resultMap id="BaseResultMap" type="org.cool.product.pojo.SpuComment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="spu_name" jdbcType="VARCHAR" property="spuName" />
+    <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
+    <result column="star" jdbcType="BIT" property="star" />
+    <result column="member_ip" jdbcType="VARCHAR" property="memberIp" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="show_status" jdbcType="BIT" property="showStatus" />
+    <result column="likes_count" jdbcType="INTEGER" property="likesCount" />
+    <result column="reply_count" jdbcType="INTEGER" property="replyCount" />
+    <result column="member_icon" jdbcType="VARCHAR" property="memberIcon" />
+    <result column="reply_id" jdbcType="BIGINT" property="replyId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.cool.product.pojo.SpuComment">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sku_id, spu_id, spu_name, member_nick_name, star, member_ip, create_time, show_status, 
+    likes_count, reply_count, member_icon, reply_id , content
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    from spu_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from spu_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cool.product.pojo.SpuComment">
+    insert into spu_comment (id, sku_id, spu_id, 
+      spu_name, member_nick_name, star, 
+      member_ip, create_time, show_status, 
+      likes_count, reply_count, member_icon, 
+      reply_id, content)
+    values (#{id,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{spuId,jdbcType=BIGINT}, 
+      #{spuName,jdbcType=VARCHAR}, #{memberNickName,jdbcType=VARCHAR}, #{star,jdbcType=BIT}, 
+      #{memberIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{showStatus,jdbcType=BIT}, 
+      #{likesCount,jdbcType=INTEGER}, #{replyCount,jdbcType=INTEGER}, #{memberIcon,jdbcType=VARCHAR}, 
+      #{replyId,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+</mapper>

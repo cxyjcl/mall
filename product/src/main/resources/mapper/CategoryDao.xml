@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.product.dao.CategoryDao">
+  <resultMap id="BaseResultMap" type="org.cool.product.pojo.Category">
+    <id column="cat_id" jdbcType="BIGINT" property="catId" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="parent_cid" jdbcType="BIGINT" property="parentCid" />
+    <result column="cat_level" jdbcType="INTEGER" property="catLevel" />
+    <result column="show_status" jdbcType="TINYINT" property="showStatus" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="icon" jdbcType="CHAR" property="icon" />
+    <result column="product_unit" jdbcType="CHAR" property="productUnit" />
+    <result column="product_count" jdbcType="INTEGER" property="productCount" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    cat_id, `name`, parent_cid, cat_level, show_status, sort, icon, product_unit, product_count
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from category
+    where cat_id = #{catId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from category
+    where cat_id = #{catId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.product.pojo.Category">
+    insert into category (cat_id, name, parent_cid, 
+      cat_level, show_status, sort, 
+      icon, product_unit, product_count
+      )
+    values (#{catId,jdbcType=BIGINT}, #{name,jdbcType=CHAR}, #{parentCid,jdbcType=BIGINT}, 
+      #{catLevel,jdbcType=INTEGER}, #{showStatus,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, 
+      #{icon,jdbcType=CHAR}, #{productUnit,jdbcType=CHAR}, #{productCount,jdbcType=INTEGER}
+      )
+  </insert>
+
+</mapper>

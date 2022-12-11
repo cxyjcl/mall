@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.product.dao.SkuInfoDao">
+  <resultMap id="BaseResultMap" type="org.cool.product.pojo.SkuInfo">
+    <id column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_desc" jdbcType="VARCHAR" property="skuDesc" />
+    <result column="catalog_id" jdbcType="BIGINT" property="catalogId" />
+    <result column="sku_default_img" jdbcType="VARCHAR" property="skuDefaultImg" />
+    <result column="sku_title" jdbcType="VARCHAR" property="skuTitle" />
+    <result column="sku_subtitle" jdbcType="VARCHAR" property="skuSubtitle" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="sale_count" jdbcType="BIGINT" property="saleCount" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    sku_id, spu_id, sku_name, sku_desc, catalog_id, sku_default_img, sku_title, sku_subtitle, 
+    price, sale_count
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sku_info
+    where sku_id = #{skuId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from sku_info
+    where sku_id = #{skuId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.product.pojo.SkuInfo">
+    insert into sku_info (sku_id, spu_id, sku_name, 
+      sku_desc, catalog_id, sku_default_img, 
+      sku_title, sku_subtitle, price, 
+      sale_count)
+    values (#{skuId,jdbcType=BIGINT}, #{spuId,jdbcType=BIGINT}, #{skuName,jdbcType=VARCHAR}, 
+      #{skuDesc,jdbcType=VARCHAR}, #{catalogId,jdbcType=BIGINT}, #{skuDefaultImg,jdbcType=VARCHAR}, 
+      #{skuTitle,jdbcType=VARCHAR}, #{skuSubtitle,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{saleCount,jdbcType=BIGINT})
+  </insert>
+
+</mapper>
