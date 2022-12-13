@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.coupon.dao.CouponHistoryDao">
+  <resultMap id="BaseResultMap" type="org.cool.coupon.pojo.CouponHistory">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
+    <result column="get_type" jdbcType="BIT" property="getType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="use_state" jdbcType="BIT" property="useState" />
+    <result column="use_time" jdbcType="TIMESTAMP" property="useTime" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_sn" jdbcType="BIGINT" property="orderSn" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, coupon_id, member_id, member_nick_name, get_type, create_time, use_state, use_time, 
+    order_id, order_sn
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coupon_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from coupon_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.coupon.pojo.CouponHistory">
+    insert into coupon_history (id, coupon_id, member_id, 
+      member_nick_name, get_type, create_time, 
+      use_state, use_time, order_id, 
+      order_sn)
+    values (#{id,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, 
+      #{memberNickName,jdbcType=VARCHAR}, #{getType,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{useState,jdbcType=BIT}, #{useTime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=BIGINT}, 
+      #{orderSn,jdbcType=BIGINT})
+  </insert>
+
+</mapper>

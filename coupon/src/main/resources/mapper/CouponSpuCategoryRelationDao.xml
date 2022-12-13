@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.coupon.dao.CouponSpuCategoryRelationDao">
+  <resultMap id="BaseResultMap" type="org.cool.coupon.pojo.CouponSpuCategoryRelation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, coupon_id, category_id, category_name
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coupon_spu_category_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from coupon_spu_category_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.coupon.pojo.CouponSpuCategoryRelation">
+    insert into coupon_spu_category_relation (id, coupon_id, category_id, 
+      category_name)
+    values (#{id,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, 
+      #{categoryName,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

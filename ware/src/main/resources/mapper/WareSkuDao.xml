@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.ware.dao.WareSkuDao">
+  <resultMap id="BaseResultMap" type="org.cool.ware.pojo.WareSku">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="ware_id" jdbcType="BIGINT" property="wareId" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="stock_locked" jdbcType="INTEGER" property="stockLocked" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sku_id, ware_id, stock, sku_name, stock_locked
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ware_sku
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from ware_sku
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.ware.pojo.WareSku">
+    insert into ware_sku (id, sku_id, ware_id, 
+      stock, sku_name, stock_locked
+      )
+    values (#{id,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{wareId,jdbcType=BIGINT}, 
+      #{stock,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, #{stockLocked,jdbcType=INTEGER}
+      )
+  </insert>
+
+</mapper>

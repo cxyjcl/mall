@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.member.dao.MemberLevelDao">
+  <resultMap id="BaseResultMap" type="org.cool.member.pojo.MemberLevel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="growth" jdbcType="INTEGER" property="growth" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, name, growth, note
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member_level
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from member_level
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.member.pojo.MemberLevel">
+    insert into member_level (id, name, growth, 
+      note)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{growth,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

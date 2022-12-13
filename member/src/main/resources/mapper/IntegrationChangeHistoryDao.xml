@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.member.dao.IntegrationChangeHistoryDao">
+  <resultMap id="BaseResultMap" type="org.cool.member.pojo.IntegrationChangeHistory">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="change_value" jdbcType="INTEGER" property="changeValue" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="source_tyoe" jdbcType="TINYINT" property="sourceType" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, member_id, create_time, change_value, note, source_type
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from integration_change_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from integration_change_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.member.pojo.IntegrationChangeHistory">
+    insert into integration_change_history (id, member_id, create_time, 
+      change_value, note, source_type
+      )
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{changeValue,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT}
+      )
+  </insert>
+
+</mapper>

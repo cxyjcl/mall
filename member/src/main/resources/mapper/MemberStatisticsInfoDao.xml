@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.member.dao.MemberStatisticsInfoDao">
+  <resultMap id="BaseResultMap" type="org.cool.member.pojo.MemberStatisticsInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="consume_amount" jdbcType="DECIMAL" property="consumeAmount" />
+    <result column="coupon_amount" jdbcType="DECIMAL" property="couponAmount" />
+    <result column="order_count" jdbcType="INTEGER" property="orderCount" />
+    <result column="coupon_count" jdbcType="INTEGER" property="couponCount" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="return_order_count" jdbcType="INTEGER" property="returnOrderCount" />
+    <result column="login_count" jdbcType="INTEGER" property="loginCount" />
+    <result column="mark_count" jdbcType="INTEGER" property="markCount" />
+    <result column="fans_count" jdbcType="INTEGER" property="fansCount" />
+    <result column="collect_product_count" jdbcType="INTEGER" property="collectProductCount" />
+    <result column="collect_subject_count" jdbcType="INTEGER" property="collectSubjectCount" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, member_id, consume_amount, coupon_amount, order_count, coupon_count, comment_count, 
+    return_order_count, login_count, mark_count, fans_count, collect_product_count, collect_subject_count
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member_statistics_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from member_statistics_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.member.pojo.MemberStatisticsInfo">
+    insert into member_statistics_info (id, member_id, consume_amount, 
+      coupon_amount, order_count, coupon_count, 
+      comment_count, return_order_count, login_count, 
+      mark_count, fans_count, collect_product_count, 
+      collect_subject_count)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{consumeAmount,jdbcType=DECIMAL}, 
+      #{couponAmount,jdbcType=DECIMAL}, #{orderCount,jdbcType=INTEGER}, #{couponCount,jdbcType=INTEGER}, 
+      #{commentCount,jdbcType=INTEGER}, #{returnOrderCount,jdbcType=INTEGER}, #{loginCount,jdbcType=INTEGER}, 
+      #{markCount,jdbcType=INTEGER}, #{fansCount,jdbcType=INTEGER}, #{collectProductCount,jdbcType=INTEGER}, 
+      #{collectSubjectCount,jdbcType=INTEGER})
+  </insert>
+
+</mapper>

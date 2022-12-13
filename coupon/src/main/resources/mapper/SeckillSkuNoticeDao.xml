@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.coupon.dao.SeckillSkuNoticeDao">
+  <resultMap id="BaseResultMap" type="org.cool.coupon.pojo.SeckillSkuNotice">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="session_id" jdbcType="BIGINT" property="sessionId" />
+    <result column="subcribe_time" jdbcType="TIMESTAMP" property="subcribeTime" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="notice_type" jdbcType="BIT" property="noticeType" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, member_id, sku_id, session_id, subcribe_time, send_time, notice_type
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from seckill_sku_notice
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from seckill_sku_notice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.coupon.pojo.SeckillSkuNotice">
+    insert into seckill_sku_notice (id, member_id, sku_id, 
+      session_id, subcribe_time, send_time, 
+      notice_type)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
+      #{sessionId,jdbcType=BIGINT}, #{subcribeTime,jdbcType=TIMESTAMP}, #{sendTime,jdbcType=TIMESTAMP}, 
+      #{noticeType,jdbcType=BIT})
+  </insert>
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.ware.dao.WareOrderTaskDetailDao">
+  <resultMap id="BaseResultMap" type="org.cool.ware.pojo.WareOrderTaskDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_num" jdbcType="INTEGER" property="skuNum" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="ware_id" jdbcType="BIGINT" property="wareId" />
+    <result column="lock_state" jdbcType="INTEGER" property="lockState" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sku_id, sku_name, sku_num, task_id, ware_id, lock_state
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ware_order_task_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from ware_order_task_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cool.ware.pojo.WareOrderTaskDetail">
+    insert into ware_order_task_detail (id, sku_id, sku_name,
+      sku_num, task_id, ware_id,
+      lock_state)
+    values (#{id,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{skuName,jdbcType=VARCHAR},
+      #{skuNum,jdbcType=INTEGER}, #{taskId,jdbcType=BIGINT}, #{wareId,jdbcType=BIGINT},
+      #{lockState,jdbcType=INTEGER})
+  </insert>
+
+</mapper>

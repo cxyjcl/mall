@@ -8,7 +8,14 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cool_ware?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
+mybatis:
+  mapper-locations: mapper/*
 #springboot 默认的日志级别是info,改为debug
 logging:
   level: #指定这个包下的日子为debug

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.ware.dao.PurchaseDetailDao">
+  <resultMap id="BaseResultMap" type="org.cool.ware.pojo.PurchaseDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="purchase_id" jdbcType="BIGINT" property="purchaseId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="sku_num" jdbcType="INTEGER" property="skuNum" />
+    <result column="sku_price" jdbcType="DECIMAL" property="skuPrice" />
+    <result column="ware_id" jdbcType="BIGINT" property="wareId" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, purchase_id, sku_id, sku_num, sku_price, ware_id, state
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from purchase_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.ware.pojo.PurchaseDetail">
+    insert into purchase_detail (id, purchase_id, sku_id, 
+      sku_num, sku_price, ware_id, 
+      state)
+    values (#{id,jdbcType=BIGINT}, #{purchaseId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
+      #{skuNum,jdbcType=INTEGER}, #{skuPrice,jdbcType=DECIMAL}, #{wareId,jdbcType=BIGINT}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+
+</mapper>

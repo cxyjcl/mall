@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.ware.dao.WareOrderTaskDao">
+  <resultMap id="BaseResultMap" type="org.cool.ware.pojo.WareOrderTask">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+    <result column="consignee_tel" jdbcType="CHAR" property="consigneeTel" />
+    <result column="delivery_address" jdbcType="VARCHAR" property="deliveryAddress" />
+    <result column="order_comment" jdbcType="VARCHAR" property="orderComment" />
+    <result column="payment_way" jdbcType="BIT" property="paymentWay" />
+    <result column="task_state" jdbcType="TINYINT" property="taskState" />
+    <result column="order_body" jdbcType="VARCHAR" property="orderBody" />
+    <result column="tracking_no" jdbcType="CHAR" property="trackingNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ware_id" jdbcType="BIGINT" property="wareId" />
+    <result column="task_comment" jdbcType="VARCHAR" property="taskComment" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, order_id, order_sn, consignee, consignee_tel, delivery_address, order_comment, 
+    payment_way, task_state, order_body, tracking_no, create_time, ware_id, task_comment
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ware_order_task
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from ware_order_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.ware.pojo.WareOrderTask">
+    insert into ware_order_task (id, order_id, order_sn, 
+      consignee, consignee_tel, delivery_address, 
+      order_comment, payment_way, task_state, 
+      order_body, tracking_no, create_time, 
+      ware_id, task_comment)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, 
+      #{consignee,jdbcType=VARCHAR}, #{consigneeTel,jdbcType=CHAR}, #{deliveryAddress,jdbcType=VARCHAR}, 
+      #{orderComment,jdbcType=VARCHAR}, #{paymentWay,jdbcType=BIT}, #{taskState,jdbcType=TINYINT}, 
+      #{orderBody,jdbcType=VARCHAR}, #{trackingNo,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{wareId,jdbcType=BIGINT}, #{taskComment,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.coupon.dao.HomeAdvDao">
+  <resultMap id="BaseResultMap" type="org.cool.coupon.pojo.HomeAdv">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="state" jdbcType="BIT" property="state" />
+    <result column="click_count" jdbcType="INTEGER" property="clickCount" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="publisher_id" jdbcType="BIGINT" property="publisherId" />
+    <result column="auth_id" jdbcType="BIGINT" property="authId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, name, pic, start_time, end_time, state, click_count, url, note, sort, publisher_id, 
+    auth_id
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from home_adv
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from home_adv
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.coupon.pojo.HomeAdv">
+    insert into home_adv (id, name, pic, 
+      start_time, end_time, state, 
+      click_count, url, note, 
+      sort, publisher_id, auth_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=BIT}, 
+      #{clickCount,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{publisherId,jdbcType=BIGINT}, #{authId,jdbcType=BIGINT}
+      )
+  </insert>
+
+</mapper>

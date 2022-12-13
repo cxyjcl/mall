@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.coupon.dao.SpuBoundDao">
+  <resultMap id="BaseResultMap" type="org.cool.coupon.pojo.SpuBound">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="grow_bounds" jdbcType="DECIMAL" property="growBounds" />
+    <result column="buy_bounds" jdbcType="DECIMAL" property="buyBounds" />
+    <result column="work" jdbcType="BIT" property="work" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, spu_id, grow_bounds, buy_bounds, work
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spu_bound
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from spu_bound
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.coupon.pojo.SpuBound">
+    insert into spu_bound (id, spu_id, grow_bounds, 
+      buy_bounds, work)
+    values (#{id,jdbcType=BIGINT}, #{spuId,jdbcType=BIGINT}, #{growBounds,jdbcType=DECIMAL}, 
+      #{buyBounds,jdbcType=DECIMAL}, #{work,jdbcType=BIT})
+  </insert>
+
+</mapper>

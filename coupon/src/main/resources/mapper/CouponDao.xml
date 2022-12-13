@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cool.coupon.dao.CouponDao">
+  <resultMap id="BaseResultMap" type="org.cool.coupon.pojo.Coupon">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coupon_type" jdbcType="BIT" property="couponType" />
+    <result column="coupon_img" jdbcType="VARCHAR" property="couponImg" />
+    <result column="coupon_name" jdbcType="VARCHAR" property="couponName" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="per_limit" jdbcType="INTEGER" property="perLimit" />
+    <result column="min_point" jdbcType="DECIMAL" property="minPoint" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="use_type" jdbcType="BIT" property="useType" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="publish_count" jdbcType="INTEGER" property="publishCount" />
+    <result column="use_count" jdbcType="INTEGER" property="useCount" />
+    <result column="receive_count" jdbcType="INTEGER" property="receiveCount" />
+    <result column="enable_start_time" jdbcType="TIMESTAMP" property="enableStartTime" />
+    <result column="enable_end_time" jdbcType="TIMESTAMP" property="enableEndTime" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="member_level" jdbcType="BIT" property="memberLevel" />
+    <result column="publish" jdbcType="BIT" property="publish" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, coupon_type, coupon_img, coupon_name, num, amount, per_limit, min_point, start_time, 
+    end_time, use_type, note, publish_count, use_count, receive_count, enable_start_time, 
+    enable_end_time, code, member_level, publish
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coupon
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from coupon
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="org.cool.coupon.pojo.Coupon">
+    insert into coupon (id, coupon_type, coupon_img, 
+      coupon_name, num, amount, 
+      per_limit, min_point, start_time, 
+      end_time, use_type, note, 
+      publish_count, use_count, receive_count, 
+      enable_start_time, enable_end_time, code, 
+      member_level, publish)
+    values (#{id,jdbcType=BIGINT}, #{couponType,jdbcType=BIT}, #{couponImg,jdbcType=VARCHAR}, 
+      #{couponName,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
+      #{perLimit,jdbcType=INTEGER}, #{minPoint,jdbcType=DECIMAL}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{useType,jdbcType=BIT}, #{note,jdbcType=VARCHAR}, 
+      #{publishCount,jdbcType=INTEGER}, #{useCount,jdbcType=INTEGER}, #{receiveCount,jdbcType=INTEGER}, 
+      #{enableStartTime,jdbcType=TIMESTAMP}, #{enableEndTime,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, 
+      #{memberLevel,jdbcType=BIT}, #{publish,jdbcType=BIT})
+  </insert>
+
+</mapper>
