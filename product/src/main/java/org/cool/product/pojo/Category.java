@@ -2,8 +2,11 @@ package org.cool.product.pojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Category {
+public class Category implements Serializable {
+
     private Long catId;
 
     private String name;
@@ -21,5 +24,4 @@ public class Category {
     private String productUnit;
 
     private Integer productCount;
-
 }

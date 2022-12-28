@@ -23,6 +23,13 @@
     from category
     where cat_id = #{catId,jdbcType=BIGINT}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from category
+  </select>
+
   <delete id="deleteById" parameterType="java.lang.Long">
     delete from category
     where cat_id = #{catId,jdbcType=BIGINT}

@@ -1,7 +1,6 @@
 package org.cool.product.service.impl;
 
 import org.cool.product.dao.SpuInfoDao;
-import org.cool.product.pojo.SpuInfo;
 import org.cool.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
